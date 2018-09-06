@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+        <key>articleImage</key>
+        <string>netflix.jpeg</string>
+		<key>articleHeading</key>
+		<string>News Heading 1 - Arts</string>
+		<key>articlePublishDate</key>
+		<string>Sept 01, 2016</string>
+        <key>articleMoreLink</key>
+        <string>https://www.appcoda.com/</string>
+	</dict>
+	<dict>
+        <key>articleImage</key>
+        <string>panasonic.jpeg</string>
+		<key>articleHeading</key>
+		<string>News Heading 2 - Science</string>
+		<key>articlePublishDate</key>
+		<string>Sept 02, 2016</string>
+        <key>articleMoreLink</key>
+        <string>https://www.raywenderlich.com</string>
+	</dict>
+	<dict>
+        <key>articleImage</key>
+        <string>US-exchange.jpeg</string>
+		<key>articleHeading</key>
+		<string>News Heading 3 - Technology</string>
+		<key>articlePublishDate</key>
+		<string>Sept 03, 2016</string>
+        <key>articleMoreLink</key>
+        <string>https://www.google.co.in</string>
+	</dict>
+	<dict>
+        <key>articleImage</key>
+        <string>nvidia.jpeg</string>
+		<key>articleHeading</key>
+		<string>News Heading 4 - World</string>
+		<key>articlePublishDate</key>
+		<string>Sept 04, 2016</string>
+        <key>articleMoreLink</key>
+        <string>http://www.flaticon.com/</string>
+	</dict>
+    <dict>
+        <key>articleImage</key>
+        <string>panasonic.jpeg</string>
+        <key>articleHeading</key>
+        <string>News Heading 5 - Medicine</string>
+        <key>articlePublishDate</key>
+        <string>Sept 02, 2016</string>
+        <key>articleMoreLink</key>
+        <string>https://www.raywenderlich.com</string>
+    </dict>
+    <dict>
+        <key>articleImage</key>
+        <string>US-exchange.jpeg</string>
+        <key>articleHeading</key>
+        <string>News Heading 6 - Sports</string>
+        <key>articlePublishDate</key>
+        <string>Sept 03, 2016</string>
+        <key>articleMoreLink</key>
+        <string>https://www.google.co.in</string>
+    </dict>
+    <dict>
+        <key>articleImage</key>
+        <string>nvidia.jpeg</string>
+        <key>articleHeading</key>
+        <string>News Heading 7 - Business</string>
+        <key>articlePublishDate</key>
+        <string>Sept 04, 2016</string>
+        <key>articleMoreLink</key>
+        <string>http://www.flaticon.com/</string>
+    </dict>
+</array>
+</plist>

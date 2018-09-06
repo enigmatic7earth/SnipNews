@@ -1,0 +1,197 @@
+//
+//  BookmarksContentViewController.m
+//  SnipNews
+//
+//  Created by NETBIZ on 09/02/17.
+//  Copyright © 2017 NetBiz. All rights reserved.
+//
+
+#import "BookmarksContentViewController.h"
+#import "Constants.h"
+
+@interface BookmarksContentViewController ()
+
+@end
+
+@implementation BookmarksContentViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+    [self setUIAttributes];
+    [self setUIContent];
+    [self initGAdBanner];
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    [self viewDidLoad];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+/*
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
+
+
+
+- (IBAction)readMoreOnWeb:(id)sender
+{
+    NSURL * urlReadMoreLink = [NSURL URLWithString:_newsArticleMoreLink];
+    
+    UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"Opening full article" message:[NSString stringWithFormat:@"App will open the article in a webpage:\n %@",_newsArticleMoreLink] preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction * ok = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        // iOS > = 10
+        if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 10.0)
+        {
+            [[UIApplication sharedApplication] openURL:urlReadMoreLink options:[NSDictionary dictionary] completionHandler:nil];
+        }
+        // iOS < 10
+        else
+        {
+            [[UIApplication sharedApplication] openURL:urlReadMoreLink];
+        }
+        
+    }];
+    [alert addAction:ok];
+    [self presentViewController:alert animated:YES completion:nil];
+    
+}
+
+- (IBAction)shareOnFacebook:(id)sender
+{
+    if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook])
+    {
+        SLComposeViewController * fbPostController = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
+        NSMutableString * fbPost = [NSMutableString stringWithFormat:@"%@\n\n%@\nRead more at:%@",_newsArticleHeading,_newsArticleContent,_newsArticleMoreLink];
+        [fbPostController setInitialText:fbPost];
+        [self presentViewController:fbPostController animated:YES completion:nil];
+    }
+    else
+    {
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"Facebook" message:@"Sorry, you cannot make this post now." preferredStyle:UIAlertControllerStyleActionSheet];
+        UIAlertAction * ok = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:nil];
+        [alert addAction:ok];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
+}
+
+- (IBAction)shareOnTwitter:(id)sender
+{
+    if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter])
+    {
+        SLComposeViewController * twPostController = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
+        NSMutableString * twTweet = [NSMutableString stringWithFormat:@"%@\n\nRead more at:%@",_newsArticleHeading,_newsArticleMoreLink];
+        [twPostController setInitialText:twTweet];
+        [self presentViewController:twPostController animated:YES completion:nil];
+    }
+    else
+    {
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"Twitter" message:@"Sorry, you cannot make this tweet now." preferredStyle:UIAlertControllerStyleActionSheet];
+        UIAlertAction * ok = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:nil];
+        [alert addAction:ok];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
+    
+}
+
+- (IBAction)shareOnLinkedIn:(id)sender
+{
+    
+}
+
+- (IBAction)shareOnGooglePlus:(id)sender
+{
+    
+}
+
+- (IBAction)shareMore:(UIButton *)sender
+{
+    NSMutableString * shareText = [NSMutableString stringWithFormat:@"%@\n%@\n\nRead more:%@",_newsArticleHeading,_newsArticleContent,_newsArticleMoreLink];
+    UIActivityViewController * activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[shareText] applicationActivities:nil];
+    
+    // check for iPad
+    if ([activityViewController respondsToSelector:@selector(popoverPresentationController)])
+    {
+        activityViewController.popoverPresentationController.sourceView = sender.superview;
+        activityViewController.popoverPresentationController.sourceRect = sender.frame;
+        // Arrow direction down presents the popover upwards.
+        activityViewController.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionDown;
+        [self presentViewController:activityViewController animated:YES completion:nil];
+    }
+    else
+    {
+        [self presentViewController:activityViewController animated:YES completion:nil];
+    }
+}
+
+
+#pragma mark Custom methods
+-(void) initGAdBanner
+{
+    _adBanner.adUnitID = GoogleAdUnitID;
+    _adBanner.adSize = kGADAdSizeSmartBannerPortrait;
+    _adBanner.delegate = self;
+    _adBanner.rootViewController = self;
+    
+    // Request Ads
+    GADRequest * request = [GADRequest request];
+    // Comment this when not testing on Simulator, or replace it with deviceIDs of the devices on which it would be tested
+    request.testDevices = @[kGADSimulatorID,@"cfe9d4ff4b613d5bae6c29b5e2d7b0ee"];
+    // cfe9d4ff4b613d5bae6c29b5e2d7b0ee -device ID of Netbiz iPad iOS 9.3
+    
+    // Load the request
+    [_adBanner loadRequest:request];
+    
+}
+
+-(void) setUIAttributes
+{
+    // Article Image
+    _newsImageView.layer.cornerRadius = 5;
+    _newsImageView.layer.borderWidth = 1.5;
+    _newsImageView.layer.borderColor = [[UIColor grayColor] CGColor];
+    
+    // Article Content
+    _newsContentTextView.layer.cornerRadius = 5;
+    
+    
+}
+-(void) setUIContent
+
+{
+    //--Updating UI in main queue--//
+    dispatch_async(dispatch_get_main_queue(), ^{
+        _newsImageView.image = [UIImage imageNamed:_newsArticleImage];
+        _newsHeadingLabel.text = _newsArticleHeading;
+        _newsPublishedDate.text = _newsArticlePublishedDate;
+    });
+    
+}
+
+#pragma mark GADBannerViewDelegate - methods
+-(void)adViewDidReceiveAd:(GADBannerView *)bannerView
+{
+    NSLog(@"Ad received, banner loaded");
+    _adBanner.hidden = NO;
+}
+
+-(void)adView:(GADBannerView *)bannerView didFailToReceiveAdWithError:(GADRequestError *)error
+{
+    NSLog(@"Failed:%@",[error localizedDescription]);
+    NSLog(@"Reason:%@",[error localizedFailureReason]);
+    NSLog(@"Suggestion:%@",[error localizedRecoverySuggestion]);
+    _adBanner.hidden = YES;
+}
+
+@end
+

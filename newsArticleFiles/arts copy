@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+        <key>articleImage</key>
+        <string>netflix.jpeg</string>
+		<key>title</key>
+		<string>Arts News 1</string>
+		<key>pubDate</key>
+		<string>Sept 01, 2016</string>
+        <key>link</key>
+        <string>https://www.appcoda.com/</string>
+	</dict>
+	<dict>
+        <key>articleImage</key>
+        <string>panasonic.jpeg</string>
+		<key>title</key>
+		<string>Arts News 2</string>
+		<key>pubDate</key>
+		<string>Sept 02, 2016</string>
+        <key>link</key>
+        <string>https://www.raywenderlich.com</string>
+	</dict>
+	<dict>
+        <key>articleImage</key>
+        <string>US-exchange.jpeg</string>
+		<key>title</key>
+		<string>Arts News 3</string>
+		<key>pubDate</key>
+		<string>Sept 03, 2016</string>
+        <key>link</key>
+        <string>https://www.google.co.in</string>
+	</dict>
+	<dict>
+        <key>articleImage</key>
+        <string>nvidia.jpeg</string>
+		<key>title</key>
+		<string>Arts News 4</string>
+		<key>pubDate</key>
+		<string>Sept 04, 2016</string>
+        <key>link</key>
+        <string>http://www.flaticon.com/</string>
+	</dict>
+</array>
+</plist>
